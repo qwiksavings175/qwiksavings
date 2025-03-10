@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt, { JwtPayload, SignOptions as JwtSignOptions } from "jsonwebtoken";
 
 interface SignOptions {
   expiresIn: string | number;
@@ -13,7 +13,7 @@ export const signJwt = (
   options: SignOptions = DEFAULT_SIGN_OPTIONS,
 ) => {
   const Secret = process.env.JWT_SECRET!;
-  const token = jwt.sign(payload, Secret, options);
+  const token = jwt.sign(payload, Secret, options as JwtSignOptions);
   return token;
 };
 
@@ -23,6 +23,7 @@ export const verifyJwt = (token: string) => {
     const decoded = jwt.verify(token, Secret);
     return decoded as JwtPayload;
   } catch (err) {
-    console.error(err);
+    console.error("Error verifying JWT:", err);
+    return null;
   }
 };
