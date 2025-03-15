@@ -1,4 +1,5 @@
 "use client";
+import axios from "@/app/api/axios/axios";
 import {
   Carousel,
   CarouselContent,
@@ -6,17 +7,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
-import { useRef } from "react";
-import Autoplay from "embla-carousel-autoplay";
-import {
-  useImageCarouselData,
-  CarouselImageItem,
-} from "@/hooks/useImageCarouselData";
 import { Skeleton } from "@/components/ui/skeleton";
-import axios from "@/app/api/axios/axios";
+import {
+  CarouselImageItem,
+  useImageCarouselData,
+} from "@/hooks/useImageCarouselData";
+import Autoplay from "embla-carousel-autoplay";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
+import { useRef } from "react";
 
 const ImageCarousel = () => {
   const { data, isLoading, error } = useImageCarouselData();
@@ -71,7 +70,7 @@ const ImageCarousel = () => {
             >
               <Image
                 src={
-                  constructS3Url(image.carouselPosterUrl) ??
+                  image.carouselPosterUrl ??
                   "https://via.placeholder.com/600x400"
                 }
                 alt={`carousel image ${index + 1}`}

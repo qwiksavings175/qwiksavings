@@ -1,40 +1,7 @@
 "use client";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "@/components/ui/use-toast";
-import { Textarea } from "@/components/ui/textarea";
 import axios from "@/app/api/axios/axios";
-import { AxiosError } from "axios";
-import { CreateCategoryFormSchema } from "@/lib/FormSchemas/CreateCategoryFormSchema";
-import Image from "next/image";
-import { Info, MinusCircle } from "lucide-react";
-import { ChangeEvent, useRef, useState, useEffect } from "react";
-import { useRouter, useParams } from "next/navigation";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -43,8 +10,40 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { toast } from "@/components/ui/use-toast";
+import { CreateCategoryFormSchema } from "@/lib/FormSchemas/CreateCategoryFormSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosError } from "axios";
+import { Info, MinusCircle } from "lucide-react";
+import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as z from "zod";
 
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
 
 type InputType = z.infer<typeof CreateCategoryFormSchema>;
 
@@ -103,7 +102,7 @@ const EditCategoryForm = () => {
           ? "yes"
           : "no",
       });
-      setSelectedImage(constructS3Url(categoryDetails.logo_url) ?? null);
+      setSelectedImage(categoryDetails.logo_url ?? null);
     }
   }, [categoryDetails, form]);
 

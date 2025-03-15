@@ -1,5 +1,6 @@
 "use client";
-import { ChangeEvent, use, useEffect, useRef, useState } from "react";
+import axios from "@/app/api/axios/axios";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -8,14 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "@/components/ui/use-toast";
-import { Textarea } from "@/components/ui/textarea";
-import axios from "@/app/api/axios/axios";
 import {
   Select,
   SelectContent,
@@ -23,19 +17,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as z from "zod";
 
-import { AxiosError } from "axios";
-import { CreateCouponFormSchema } from "@/lib/FormSchemas/CreateCouponFormSchema";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { CalendarIcon, CheckIcon, MinusCircle } from "lucide-react";
 import { Calendar } from "@/components/ui/Calendar";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { CaretSortIcon } from "@radix-ui/react-icons";
 import {
   Command,
   CommandEmpty,
@@ -44,8 +33,6 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
 import {
   MultiSelector,
   MultiSelectorContent,
@@ -54,6 +41,19 @@ import {
   MultiSelectorList,
   MultiSelectorTrigger,
 } from "@/components/ui/MultipleSelector";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { CreateCouponFormSchema } from "@/lib/FormSchemas/CreateCouponFormSchema";
+import { cn } from "@/lib/utils";
+import { CaretSortIcon } from "@radix-ui/react-icons";
+import { AxiosError } from "axios";
+import { format } from "date-fns";
+import { CalendarIcon, CheckIcon, MinusCircle } from "lucide-react";
+import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
 
 import {
   Dialog,
@@ -64,7 +64,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
 
 type InputType = z.infer<typeof CreateCouponFormSchema>;
 
@@ -208,15 +207,15 @@ const EditCouponForm = ({ categories, stores, events }: CouponFormProps) => {
       // Set image previews
       if (couponDetails.thumbnail_url)
         setSelectedThumbnailImage(
-          constructS3Url(couponDetails.thumbnail_url) ?? null,
+          couponDetails.thumbnail_url ?? null,
         );
       if (couponDetails.flipperImage_url)
         setSelectedFlipperImage(
-          constructS3Url(couponDetails.flipperImage_url) ?? null,
+          couponDetails.flipperImage_url ?? null,
         );
       if (couponDetails.carouselPosterUrl)
         setSelectedCarouselImage(
-          constructS3Url(couponDetails.carouselPosterUrl) ?? null,
+          couponDetails.carouselPosterUrl ?? null,
         );
     }
   }, [couponDetails, reset, setValue]);
@@ -673,9 +672,9 @@ const EditCouponForm = ({ categories, stores, events }: CouponFormProps) => {
                     >
                       {field.value
                         ? categories.find(
-                            (category) =>
-                              `${category.categoryId}` === field.value,
-                          )?.name
+                          (category) =>
+                            `${category.categoryId}` === field.value,
+                        )?.name
                         : "Select a Category"}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
@@ -749,8 +748,8 @@ const EditCouponForm = ({ categories, stores, events }: CouponFormProps) => {
                     >
                       {field.value
                         ? stores.find(
-                            (store) => `${store.storeId}` === field.value,
-                          )?.name
+                          (store) => `${store.storeId}` === field.value,
+                        )?.name
                         : "Select a store"}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>

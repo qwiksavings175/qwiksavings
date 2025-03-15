@@ -1,9 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import Spinner from "../../_PageComponents/Spinner";
-import { format } from "date-fns";
-import Image from "next/image";
-import { Trash2 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,9 +8,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { format } from "date-fns";
+import { Trash2 } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
+import Spinner from "../../_PageComponents/Spinner";
 
 interface BlogsDisplayProps {
   like: string | null;
@@ -89,7 +88,7 @@ const BlogsDisplay = ({
             >
               {blog.thumbnail_url ? (
                 <Image
-                  src={constructS3Url(blog.thumbnail_url)!}
+                  src={blog.thumbnail_url!}
                   alt={blog.title}
                   width={400}
                   height={400}

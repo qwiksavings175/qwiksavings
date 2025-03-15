@@ -1,5 +1,7 @@
 "use client";
 
+import axios from "@/app/api/axios/axios";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -8,27 +10,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "@/components/ui/use-toast";
 import { Textarea } from "@/components/ui/textarea";
-import axios from "@/app/api/axios/axios";
+import { toast } from "@/components/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as z from "zod";
 
-import Image from "next/image";
-import { Info, MinusCircle } from "lucide-react";
-import { ChangeEvent, useRef, useState, useEffect } from "react";
-import { useRouter, useParams } from "next/navigation";
-import { CreateEventFormSchema } from "@/lib/FormSchemas/CreateEventFormSchema";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { CreateEventFormSchema } from "@/lib/FormSchemas/CreateEventFormSchema";
+import { Info, MinusCircle } from "lucide-react";
+import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import {
   Dialog,
@@ -39,7 +39,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
 
 type InputType = z.infer<typeof CreateEventFormSchema>;
 
@@ -103,8 +102,8 @@ const EditEventForm = () => {
         logo_url: undefined,
         cover_url: undefined,
       });
-      setSelectedLogo(constructS3Url(eventDetails.logo_url) ?? null);
-      setSelectedCover(constructS3Url(eventDetails.cover_url) ?? null);
+      setSelectedLogo(eventDetails.logo_url ?? null);
+      setSelectedCover(eventDetails.cover_url ?? null);
     }
   }, [eventDetails, form]);
 

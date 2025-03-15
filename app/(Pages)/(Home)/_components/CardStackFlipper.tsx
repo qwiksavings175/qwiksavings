@@ -1,13 +1,12 @@
 "use client";
-import { useState, useMemo, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import axios from "@/app/api/axios/axios";
+import { useCardFlipperData } from "@/hooks/useCardFlipperData";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { useCardFlipperData } from "@/hooks/useCardFlipperData";
-import axios from "@/app/api/axios/axios";
 import { useRouter } from "next/navigation";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
+import { useEffect, useMemo, useState } from "react";
 
 const CardStackFlipper = ({ autoplay }: { autoplay: boolean }) => {
   const { data, error } = useCardFlipperData();
@@ -123,7 +122,7 @@ const CardStackFlipper = ({ autoplay }: { autoplay: boolean }) => {
                 <div className="flex flex-col items-center gap-y-4">
                   <Image
                     src={
-                      constructS3Url(card.store.logo_url) ??
+                      card.store.logo_url ??
                       "https://via.placeholder.com/600x400"
                     }
                     alt={`Logo ${i}`}
@@ -133,7 +132,7 @@ const CardStackFlipper = ({ autoplay }: { autoplay: boolean }) => {
                   />
                   <Image
                     src={
-                      constructS3Url(card.flipperImage_url) ??
+                      card.flipperImage_url ??
                       "https://via.placeholder.com/600x400"
                     }
                     alt={`Logo ${i}`}

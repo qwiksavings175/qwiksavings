@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import useGetBlogDetails from "@/hooks/useGetBlogDetails";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -112,7 +111,7 @@ const BlogDetailsPage: React.FC<BlogDetailsPageProps> = ({ blogId }) => {
             {data.thumbnail_url && (
               <Image
                 src={
-                  constructS3Url(data.thumbnail_url) ??
+                  data.thumbnail_url ??
                   "https://via.placeholder.com/600"
                 }
                 alt={data.title}

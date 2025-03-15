@@ -1,71 +1,58 @@
-import {
-  S3Client,
-  PutObjectCommand,
-  DeleteObjectCommand,
-  ObjectCannedACL,
-  DeleteObjectsCommand,
-} from "@aws-sdk/client-s3";
+'use server'
 
-// Configure S3 Client
-const s3Client = new S3Client({
-  region: process.env.AWS_REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_S3_ACCESS_KEY!,
-    secretAccessKey: process.env.AWS_S3_SECRET_KEY!,
-  },
+import { v2 as cloudinary } from "cloudinary";
+import streamifier from "streamifier";
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 export async function uploadToS3(
   buffer: Buffer,
   folder: string,
 ): Promise<string> {
-  const key = `${folder}/${Date.now()}`;
-  const uploadParams = {
-    Bucket: process.env.AWS_S3_BUCKET_NAME!,
-    Key: key,
-    Body: buffer,
-    ACL: ObjectCannedACL.public_read,
-  };
-
-  try {
-    const command = new PutObjectCommand(uploadParams);
-    await s3Client.send(command);
-
-    return key;
-  } catch (error) {
-    console.error("S3 Upload Error:", error);
-    throw new Error("Failed to upload file to S3");
-  }
+  return new Promise((resolve, reject) => {
+    const options = { folder };
+    const uploadStream = cloudinary.uploader.upload_stream(options, (error, result) => {
+      if (error) {
+        console.error("Cloudinary Upload Error:", error);
+        return reject(new Error("Failed to upload file to Cloudinary"));
+      }
+      if (result) {
+        // Return the secure URL of the uploaded image
+        return resolve(result.secure_url);
+      }
+      return reject(new Error("Unknown error during Cloudinary upload"));
+    });
+    streamifier.createReadStream(buffer).pipe(uploadStream);
+  });
 }
 
 export async function deleteFromS3(key: string): Promise<void> {
   try {
-    const deleteParams = {
-      Bucket: process.env.AWS_S3_BUCKET_NAME!,
-      Key: key,
-    };
-
-    const command = new DeleteObjectCommand(deleteParams);
-    await s3Client.send(command);
+    const result = await cloudinary.uploader.destroy(key);
+    if (result.result !== "ok" && result.result !== "not found") {
+      // "not found" is acceptable if the resource was already deleted
+      throw new Error(`Deletion unsuccessful: ${result.result}`);
+    }
   } catch (error) {
-    console.error("S3 Delete Error:", error);
-    throw new Error("Failed to delete file from S3");
+    console.error("Cloudinary Delete Error:", error);
+    throw new Error("Failed to delete file from Cloudinary");
   }
 }
 
 export async function deleteMultipleFilesFromS3(
   keyToDeleteArray: { Key: string }[],
 ): Promise<void> {
-  const deleteMultipleFilesCommand = new DeleteObjectsCommand({
-    Bucket: process.env.AWS_S3_BUCKET_NAME,
-    Delete: {
-      Objects: keyToDeleteArray,
-    },
-  });
-  await s3Client.send(deleteMultipleFilesCommand);
-}
-
-export function constructS3Url(key: string | undefined): string | undefined {
-  if (!key) return;
-  return `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.${process.env.NEXT_PUBLIC_AWS_REGION}.amazonaws.com/${key}`;
+  try {
+    const publicIds = keyToDeleteArray.map((item) => item.Key);
+    // Delete multiple resources in one API call
+    await cloudinary.api.delete_resources(publicIds);
+  } catch (error) {
+    console.error("Cloudinary Multiple Delete Error:", error);
+    throw new Error("Failed to delete multiple files from Cloudinary");
+  }
 }

@@ -1,10 +1,9 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import useGetEvents from "@/hooks/useGetEvents";
 import Image from "next/image";
-import Spinner from "../../_PageComponents/Spinner";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
+import Spinner from "../../_PageComponents/Spinner";
 
 const EventDisplay = () => {
   const { data, error, isLoading } = useGetEvents();
@@ -32,7 +31,7 @@ const EventDisplay = () => {
 
               {event.logo_url ? (
                 <Image
-                  src={constructS3Url(event.logo_url)!}
+                  src={event.logo_url!}
                   alt={event.name}
                   width={600}
                   height={600}

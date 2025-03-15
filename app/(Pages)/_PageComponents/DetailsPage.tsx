@@ -48,7 +48,6 @@ import { PiSmileySadBold } from "react-icons/pi";
 import { Link as ScrollLink } from "react-scroll";
 import { StarRating } from "../(Store)/_StoreComponent/StarRating";
 import Seperator from "./Seperator";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
 
 interface DetailsPageProps {
   fetchFrom: "store" | "category";
@@ -480,7 +479,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
         <div className="size-32 rounded-full border border-black bg-popover p-1 transition-shadow duration-200 ease-linear hover:shadow-lg">
           <Image
             src={
-              constructS3Url(detailsData?.logo_url) ??
+              detailsData?.logo_url ??
               "https://via.placeholder.com/600x400"
             }
             alt={detailsData?.name + " Logo"}
@@ -532,7 +531,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
             <div className="size-56 rounded-full border border-black bg-popover p-1 transition-shadow duration-200 ease-linear hover:shadow-lg">
               <Image
                 src={
-                  constructS3Url(detailsData.logo_url) ??
+                  detailsData.logo_url ??
                   "https://via.placeholder.com/600x400"
                 }
                 alt={`${isStore ? "Store" : "Category"} Logo`}
@@ -800,7 +799,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                           <div className="flex w-16 flex-col items-center border sm:w-24">
                             <Image
                               src={
-                                constructS3Url(coupon.store.logo_url) ??
+                                coupon.store.logo_url ??
                                 "https://via.placeholder.com/600x400"
                               }
                               width={400}
@@ -1039,7 +1038,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                             <div className="flex w-16 flex-col items-center border sm:w-24">
                               <Image
                                 src={
-                                  constructS3Url(coupon.store.logo_url) ??
+                                  coupon.store.logo_url ??
                                   "https://via.placeholder.com/600x400"
                                 }
                                 width={400}
@@ -1426,7 +1425,7 @@ const CouponDialog: React.FC<{
           <div className="grid size-44 place-items-center rounded-full border border-black bg-popover p-1">
             <Image
               src={
-                constructS3Url(logoUrl) ?? "https://via.placeholder.com/100x100"
+                logoUrl ?? "https://via.placeholder.com/100x100"
               }
               width={400}
               height={400}
@@ -1520,7 +1519,7 @@ const DealDialog: React.FC<{
           <div className="grid size-44 place-items-center rounded-full border border-black bg-popover p-1">
             <Image
               src={
-                constructS3Url(logoUrl) ?? "https://via.placeholder.com/100x100"
+                logoUrl ?? "https://via.placeholder.com/100x100"
               }
               width={400}
               height={400}

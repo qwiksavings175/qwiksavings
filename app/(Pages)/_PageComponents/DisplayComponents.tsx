@@ -1,9 +1,4 @@
 "use client";
-import Image from "next/image";
-import Spinner from "./Spinner";
-import Link from "next/link";
-import React, { useState } from "react";
-import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,9 +8,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Trash2 } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
+import { useState } from "react";
+import Spinner from "./Spinner";
 
 interface DisplayItemsProps<
   T extends {
@@ -130,7 +129,7 @@ const DisplayItems = <
                         <div className="rounded-full border border-black bg-white p-1">
                           <Image
                             src={
-                              constructS3Url(item.logo_url) ??
+                              item.logo_url ??
                               "https://via.placeholder.com/600x400"
                             }
                             alt={item.name}

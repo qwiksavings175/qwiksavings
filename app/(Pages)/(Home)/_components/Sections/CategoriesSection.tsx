@@ -9,7 +9,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import useGetCategoryCoupons, { Coupon } from "@/hooks/useGetCategoryCoupons";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
 import { format } from "date-fns";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
 import Image from "next/image";
@@ -130,7 +129,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({
               <div className="flex w-full items-center justify-center rounded-tl-md rounded-tr-md">
                 {coupon.thumbnail_url ? (
                   <Image
-                    src={constructS3Url(coupon.thumbnail_url)!}
+                    src={coupon.thumbnail_url!}
                     width={1920}
                     height={1080}
                     alt="Logo"
@@ -147,7 +146,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({
                     {coupon.store.logo_url ? (
                       <Link href={`/store/${coupon.store.slug}`}>
                         <Image
-                          src={constructS3Url(coupon.store.logo_url)!}
+                          src={coupon.store.logo_url!}
                           alt="Brand logo"
                           width={400}
                           height={400}
@@ -281,7 +280,7 @@ const CouponDialog: React.FC<{
           <div className="grid size-44 place-items-center rounded-full border border-black bg-popover p-1 :border-neutral-700">
             <Image
               src={
-                constructS3Url(logoUrl) ?? "https://via.placeholder.com/100x100"
+                logoUrl ?? "https://via.placeholder.com/100x100"
               }
               width={400}
               height={400}
@@ -375,7 +374,7 @@ const DealDialog: React.FC<{
           <div className="grid size-44 place-items-center rounded-full border border-black bg-popover p-1">
             <Image
               src={
-                constructS3Url(logoUrl) ?? "https://via.placeholder.com/100x100"
+                logoUrl ?? "https://via.placeholder.com/100x100"
               }
               width={400}
               height={400}

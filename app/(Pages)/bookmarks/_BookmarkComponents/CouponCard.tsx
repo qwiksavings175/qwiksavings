@@ -1,20 +1,19 @@
 "use client";
+import axios from "@/app/api/axios/axios";
 import { Button } from "@/components/ui/button";
-import { Coupon } from "@/lib/types/Coupon";
-import { Heart, ThumbsDown, ThumbsUp } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import Image from "next/image";
-import { useState } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
-import axios from "@/app/api/axios/axios";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
+import { Coupon } from "@/lib/types/Coupon";
+import { Heart, ThumbsDown, ThumbsUp } from "lucide-react";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface CouponCardProps {
   coupon: Coupon;
@@ -103,7 +102,7 @@ const CouponCard = ({
       <div className="mb-4 flex items-center">
         {coupon.storeLogo && (
           <Image
-            src={constructS3Url(coupon.storeLogo)!}
+            src={coupon.storeLogo!}
             alt={coupon.storeName}
             width={64}
             height={64}

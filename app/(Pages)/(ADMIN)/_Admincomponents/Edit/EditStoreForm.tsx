@@ -1,50 +1,6 @@
 "use client";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useFieldArray } from "react-hook-form";
-import { toast } from "@/components/ui/use-toast";
-import { CreateStoreFormScehma } from "@/lib/FormSchemas/CreateStoreFormSchema";
-import { Textarea } from "@/components/ui/textarea";
 import axios from "@/app/api/axios/axios";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useState, useEffect, ChangeEvent, useRef } from "react";
-import Image from "next/image";
-import { Info, MinusCircle } from "lucide-react";
-import { AxiosError } from "axios";
-import { useRouter, useParams } from "next/navigation";
-import RichTextEditor from "@/components/ui/RichTextEditor";
-import {
-  MultiSelector,
-  MultiSelectorContent,
-  MultiSelectorInput,
-  MultiSelectorItem,
-  MultiSelectorList,
-  MultiSelectorTrigger,
-} from "@/components/ui/MultipleSelector";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -53,6 +9,48 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  MultiSelector,
+  MultiSelectorContent,
+  MultiSelectorInput,
+  MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
+} from "@/components/ui/MultipleSelector";
+import RichTextEditor from "@/components/ui/RichTextEditor";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { toast } from "@/components/ui/use-toast";
+import { CreateStoreFormScehma } from "@/lib/FormSchemas/CreateStoreFormSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosError } from "axios";
+import { Info, MinusCircle } from "lucide-react";
+import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import * as z from "zod";
 
 type InputType = z.infer<typeof CreateStoreFormScehma>;
 interface StoreFormProps {
@@ -153,7 +151,7 @@ const EditStoreForm = ({ similarStores = [] }: StoreFormProps) => {
         isFeatured: storeDetails.isFeatured ? "yes" : "no",
         addToPopularStores: storeDetails.addToPopularStores ? "yes" : "no",
       });
-      setSelectedImage(constructS3Url(storeDetails.logo_url) ?? null);
+      setSelectedImage(storeDetails.logo_url ?? null);
     }
   }, [storeDetails, reset]);
 

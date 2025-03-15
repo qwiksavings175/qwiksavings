@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -8,28 +9,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "@/components/ui/use-toast";
+import * as z from "zod";
 
 import axios from "@/app/api/axios/axios";
-import { AxiosError } from "axios";
-import Image from "next/image";
-import { CheckIcon, MinusCircle } from "lucide-react";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { CreateBlogFormSchema } from "@/lib/FormSchemas/CreateBlogFormSchema";
-import RichTextEditor from "@/components/ui/RichTextEditor";
-import { useParams, useRouter } from "next/navigation";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { CaretSortIcon } from "@radix-ui/react-icons";
 import {
   Command,
   CommandEmpty,
@@ -46,7 +32,20 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import RichTextEditor from "@/components/ui/RichTextEditor";
+import { CreateBlogFormSchema } from "@/lib/FormSchemas/CreateBlogFormSchema";
+import { cn } from "@/lib/utils";
+import { CaretSortIcon } from "@radix-ui/react-icons";
+import { AxiosError } from "axios";
+import { CheckIcon, MinusCircle } from "lucide-react";
+import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 type InputType = z.infer<typeof CreateBlogFormSchema>;
 
@@ -99,7 +98,7 @@ const EditBlogForm = ({
         content: blogDetails.content,
         category_id: blogDetails.category_id.toString() ?? "",
       });
-      setSelectedImage(constructS3Url(blogDetails.thumbnail_url) ?? null);
+      setSelectedImage(blogDetails.thumbnail_url ?? null);
     }
   }, [blogDetails, form]);
 
@@ -271,9 +270,9 @@ const EditBlogForm = ({
                     >
                       {field.value
                         ? categories.find(
-                            (category) =>
-                              `${category.categoryId}` === field.value,
-                          )?.name
+                          (category) =>
+                            `${category.categoryId}` === field.value,
+                        )?.name
                         : "Select a Category"}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>

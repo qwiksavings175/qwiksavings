@@ -1,15 +1,25 @@
 "use client";
-import useGetEventDetails from "@/hooks/useGetEventDetails";
-import Spinner from "../../_PageComponents/Spinner";
+import axios from "@/app/api/axios/axios";
 import {
-  notFound,
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
-import Link from "next/link";
-import { useSession } from "next-auth/react";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "@/components/ui/use-toast";
+import { useActiveFestival } from "@/hooks/useFestivalActive";
+import useGetEventDetails from "@/hooks/useGetEventDetails";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 import {
   ChevronRight,
   Heart,
@@ -19,33 +29,21 @@ import {
   User,
   Verified,
 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
+import {
+  notFound,
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import axios from "@/app/api/axios/axios";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { format } from "date-fns";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import Seperator from "../../_PageComponents/Seperator";
-import { cn } from "@/lib/utils";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogOverlay,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { PiSmileySadBold } from "react-icons/pi";
-import { toast } from "@/components/ui/use-toast";
-import { useActiveFestival } from "@/hooks/useFestivalActive";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { constructS3Url } from "@/lib/utilities/AwsConfig";
+import { PiSmileySadBold } from "react-icons/pi";
+import Seperator from "../../_PageComponents/Seperator";
+import Spinner from "../../_PageComponents/Spinner";
 
 type ReactionType = "LIKE" | "DISLIKE";
 
@@ -443,7 +441,7 @@ const EventDetails = () => {
             <div className="size-32 rounded-full border border-black bg-popover p-1 transition-shadow duration-200 ease-linear hover:shadow-lg">
               <Image
                 src={
-                  constructS3Url(data?.logo_url) ??
+                  data?.logo_url ??
                   "https://via.placeholder.com/600x400"
                 }
                 alt={data?.name + " Logo"}
@@ -461,7 +459,7 @@ const EventDetails = () => {
           >
             {data?.cover_url && (
               <Image
-                src={constructS3Url(data?.cover_url)!}
+                src={data?.cover_url!}
                 alt="Event Cover url"
                 width={1920}
                 height={1080}
@@ -473,7 +471,7 @@ const EventDetails = () => {
                 <div className="size-56 rounded-full border border-black bg-popover p-1">
                   <Image
                     src={
-                      constructS3Url(data.logo_url) ??
+                      data.logo_url ??
                       "https://via.placeholder.com/600x400"
                     }
                     alt={`Event Logo`}
@@ -592,7 +590,7 @@ const EventDetails = () => {
                             <div className="flex w-16 flex-col items-center border sm:w-24">
                               <Image
                                 src={
-                                  constructS3Url(coupon.store.logo_url) ??
+                                  coupon.store.logo_url ??
                                   "https://via.placeholder.com/600x400"
                                 }
                                 width={400}
@@ -832,7 +830,7 @@ const EventDetails = () => {
                                 <div className="flex w-16 flex-col items-center border sm:w-24">
                                   <Image
                                     src={
-                                      constructS3Url(coupon.store.logo_url) ??
+                                      coupon.store.logo_url ??
                                       "https://via.placeholder.com/600x400"
                                     }
                                     width={400}
@@ -1124,7 +1122,7 @@ const CouponDialog: React.FC<{
           <div className="grid size-44 place-items-center rounded-full border border-black bg-popover p-1">
             <Image
               src={
-                constructS3Url(logoUrl) ?? "https://via.placeholder.com/100x100"
+                logoUrl ?? "https://via.placeholder.com/100x100"
               }
               width={400}
               height={400}
@@ -1218,7 +1216,7 @@ const DealDialog: React.FC<{
           <div className="grid size-44 place-items-center rounded-full border border-black bg-popover p-1">
             <Image
               src={
-                constructS3Url(logoUrl) ?? "https://via.placeholder.com/100x100"
+                logoUrl ?? "https://via.placeholder.com/100x100"
               }
               width={400}
               height={400}
