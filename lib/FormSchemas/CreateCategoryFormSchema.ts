@@ -10,5 +10,5 @@ export const CreateCategoryFormSchema = z.object({
   keyToDelete: z.string().optional(),
   logo_url: z.string().optional(),
   addToTodaysTopCategories: z.enum(["yes", "no"]).default("no"),
-  description: z.string().min(1, "Description is required"),
+  description: z.string().optional(),
 });

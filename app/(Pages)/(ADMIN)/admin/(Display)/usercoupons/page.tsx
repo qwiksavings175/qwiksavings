@@ -113,7 +113,7 @@ export default function UserCoupons() {
               <TableCell>{coupon.store.name}</TableCell>
               <TableCell>{coupon.category.name}</TableCell>
               <TableCell>
-                {format(new Date(coupon.due_date), "dd-MMM-yyyy")}
+                {format(new Date(coupon.due_date), "dd/MM/yyyy")}
               </TableCell>
               <TableCell className="flex items-center gap-x-2">
                 <TooltipProvider>

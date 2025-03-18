@@ -3,13 +3,12 @@
 import CustomPaginationComponent from "@/app/(Pages)/_PageComponents/CustomPaginationComponent";
 import DisplayItems from "@/app/(Pages)/_PageComponents/DisplayComponents";
 import FilterBlocks from "@/app/(Pages)/_PageComponents/FilterBlocks";
-import { useFilter } from "@/hooks/useFilter";
-import { Tag } from "lucide-react";
-import Link from "next/link";
 import axios from "@/app/api/axios/axios";
 import { toast } from "@/components/ui/use-toast";
+import { useFilter } from "@/hooks/useFilter";
 import { AxiosError } from "axios";
-import { log } from "console";
+import { Tag } from "lucide-react";
+import Link from "next/link";
 
 const AdminAllStoresPage = () => {
   const {

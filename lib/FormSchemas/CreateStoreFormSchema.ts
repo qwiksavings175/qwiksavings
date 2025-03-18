@@ -18,7 +18,7 @@ export const CreateStoreFormScehma = z.object({
   ref_link: z.string().url("Reference link must be a valid URL"),
   isFeatured: z.enum(["yes", "no"]).default("no"),
   addToPopularStores: z.enum(["yes", "no"]).default("no"),
-  description: z.string().min(1, "Description is required"),
+  description: z.string().optional(),
   moreAbout: z.string(),
   hintHeading: z.string(),
   hint: z.string(),

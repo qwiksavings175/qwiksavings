@@ -799,8 +799,8 @@ const EventDetails = () => {
                         <div className="flex flex-col items-start sm:flex-row sm:justify-between ">
                           <p className="mb-2">{coupon.description}</p>
                           <p className="text-muted-foreground">
-                            Expires on:{" "}
-                            {format(new Date(coupon.due_date), "dd-MMM-yyy")}
+                            Expires{" "}
+                            {format(new Date(coupon.due_date), "dd/MM/yyyy")}
                           </p>
                         </div>
                       </AccordionContent>
@@ -1132,7 +1132,7 @@ const CouponDialog: React.FC<{
           </div>
           <p className="text-lg font-medium">{title}</p>
           <p className="text font-medium text-muted-foreground">
-            Ends on {expiry}
+            Ends {expiry}
           </p>
           <div className="flex w-full min-w-24 items-center justify-between gap-x-2 rounded-full border border-app-main px-5 py-3 sm:w-1/2">
             <span className="">{couponCode}</span>
@@ -1209,9 +1209,6 @@ const DealDialog: React.FC<{
 }) => {
     return (
       <DialogContent className="w-11/12 !bg-app-bg-main sm:w-full">
-        <DialogHeader>
-          <DialogTitle>About Deal</DialogTitle>
-        </DialogHeader>
         <div className="flex flex-col items-center gap-4">
           <div className="grid size-44 place-items-center rounded-full border border-black bg-popover p-1">
             <Image
@@ -1225,7 +1222,7 @@ const DealDialog: React.FC<{
             />
           </div>
           <p className="text-lg font-medium">{title}</p>
-          <p className="font-medium text-muted-foreground">Ends on {expiry}</p>
+          <p className="font-medium text-muted-foreground">Ends {expiry}</p>
           <Button className="min-w-40 bg-app-main py-6" asChild>
             <Link href={ref_link} target="_blank">
               Go to Deal
