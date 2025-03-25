@@ -143,7 +143,7 @@ const SearchBar = () => {
           id="search"
           type="text"
           ref={inputRef}
-          className="w-full border-none bg-transparent caret-rose-600 outline-none placeholder:text-xs md:placeholder:text-xs"
+          className="w-full border-none bg-transparent caret-rose-600 outline-none placeholder:text-xs md:placeholder:text-xs py-1"
           placeholder="Search for brands, categories"
           onChange={(e) => debouncedSetQuery(e.target.value)}
           onFocus={handleInputFocus}

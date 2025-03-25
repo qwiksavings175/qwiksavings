@@ -41,7 +41,7 @@ const FeaturedStoreSection = () => {
         <h2 className="mb-6 text-2xl font-bold lg:text-3xl">Featured Stores</h2>
         <Link
           href={"/stores"}
-          className="font-medium transition-all duration-300 ease-linear hover:text-app-main hover:underline sm:-translate-y-3 lg:translate-y-0"
+          className="font-medium transition-all duration-300 ease-linear hover:text-app-main hover:underline sm:-translate-y-3 lg:translate-y-0 mt-2"
         >
           View all stores
         </Link>

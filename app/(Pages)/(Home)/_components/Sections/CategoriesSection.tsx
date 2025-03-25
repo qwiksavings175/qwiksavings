@@ -28,6 +28,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({
   title,
 }) => {
   const { data, error, isLoading } = useGetCategoryCoupons(fetchFrom);
+  
   const [isCouponDialogOpen, setIsCouponDialogOpen] = useState(false);
   const [isDealDialogOpen, setIsDealDialogOpen] = useState(false);
   const [dialogInfo, setDialogInfo] = useState({

@@ -1232,7 +1232,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                   className={`${commonStyles} border-2 border-neutral-200 xl:w-[97%]`}
                 >
                   <h2 className="mb-4 w-full text-xl font-bold sm:text-2xl lg:text-3xl">
-                    FAQS
+                    FAQs
                   </h2>
                   <Accordion
                     type="single"
