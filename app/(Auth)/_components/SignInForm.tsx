@@ -124,12 +124,14 @@ const SignInForm = ({ callbackUrl }: SignInFormProps) => {
             </FormItem>
           )}
         />
-        <Link
-          className="cursor-pointer text-sm font-medium text-app-main underline sm:text-base"
-          href={"/forgotpassword"}
-        >
-          Forgot Password?
-        </Link>
+        <div className="mt-5">
+          <Link
+            className="cursor-pointer text-sm font-medium text-app-main underline sm:text-base"
+            href={"/forgotpassword"}
+          >
+            Forgot Password?
+          </Link>
+        </div>
         <Button
           type="submit"
           className="w-full place-self-center rounded-lg hover:shadow-md"

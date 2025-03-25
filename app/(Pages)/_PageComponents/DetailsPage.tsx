@@ -658,9 +658,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                     <div
                       className={`flex cursor-pointer items-center justify-between font-semibold`}
                     >
-                      <p className="inline-block text-center font-medium">
-                        More About
-                      </p>
+                 
                       <p className="ml-auto inline-block text-center">
                         <Info className="size-4" />
                       </p>
@@ -676,7 +674,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                 title="Popular Stores"
                 items={popularData.map((store, index) => ({
                   id: index,
-                  name: store.name,
+                  name: store.slug,
                 }))}
                 isStore
               />
@@ -815,7 +813,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                                 "grid w-full place-items-center text-black ",
                               )}
                             >
-                              {coupon.type === "Coupon" ? "Code" : "Deal"}
+                              {coupon.type === "Coupon" ? "CODE" : "DEAL"}
                             </Badge>
                           </div>
                           <AccordionTrigger className="px-1 text-sm sm:px-3 sm:text-base [&[data-state=open]>svg]:text-white [&[data-state=open]]:bg-app-main [&[data-state=open]]:text-white ">
@@ -1051,7 +1049,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                                   "grid w-full place-items-center bg-neutral-500 text-black hover:bg-neutral-500"
                                 }
                               >
-                                {coupon.type === "Coupon" ? "Code" : "Deal"}
+                                {coupon.type === "Coupon" ? "CODE" : "DEAL"}
                               </Badge>
                             </div>
                             <AccordionTrigger className="px-1 sm:px-3 [&[data-state=open]>svg]:text-white [&[data-state=open]]:bg-neutral-500 [&[data-state=open]]:text-white">
@@ -1273,9 +1271,6 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                 className={`${commonStyles} ${!detailsData.moreAbout && "hidden"} border-2 border-neutral-200 xl:w-[97%]`}
               >
                 <div className={`w-full`}>
-                  <h2 className="mb-4 text-xl font-bold sm:text-2xl lg:text-3xl">
-                    More About
-                  </h2>
                   <div
                     dangerouslySetInnerHTML={{ __html: detailsData.moreAbout }}
                     className="w-full"
@@ -1307,7 +1302,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                 title="Popular Stores"
                 items={popularData.map((store, index) => ({
                   id: index,
-                  name: store.name,
+                  name: store.slug,
                 }))}
                 isHidden
                 isStore
@@ -1418,9 +1413,6 @@ const CouponDialog: React.FC<{
 
     return (
       <DialogContent className="w-11/12 !bg-app-bg-main sm:w-full">
-        <DialogHeader>
-          <DialogTitle>Coupon Details</DialogTitle>
-        </DialogHeader>
         <div className="flex flex-col items-center gap-4">
           <div className="grid size-44 place-items-center rounded-full border border-black bg-popover p-1">
             <Image

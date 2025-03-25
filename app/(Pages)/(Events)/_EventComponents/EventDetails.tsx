@@ -1116,7 +1116,6 @@ const CouponDialog: React.FC<{
     return (
       <DialogContent className="w-11/12 !bg-app-bg-main sm:w-full">
         <DialogHeader>
-          <DialogTitle>Coupon Details</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col items-center gap-4">
           <div className="grid size-44 place-items-center rounded-full border border-black bg-popover p-1">

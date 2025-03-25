@@ -12,6 +12,7 @@ export async function GET() {
       },
       select: {
         slug: true,
+        name: true,
       },
     });
     return NextResponse.json({ success: true, popularStores }, { status: 200 });
