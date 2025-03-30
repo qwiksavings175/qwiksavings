@@ -331,3 +331,7 @@ ALTER TABLE "events"
 ALTER TABLE "categories"
     ADD COLUMN "metaTitle" TEXT,
     ADD COLUMN "metaDescription" TEXT;
+
+ALTER TABLE "blogs"
+    ADD COLUMN "metaTitle" TEXT,
+    ADD COLUMN "metaDescription" TEXT;
