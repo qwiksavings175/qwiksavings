@@ -24,7 +24,16 @@ const ImageCarousel = () => {
 
   if (!data || data.length === 0 || error) return null;
   if (isLoading)
-    return <Skeleton className="w-full lg:w-2/3 xl:w-3/4 2xl:-translate-x-6" />;
+    return (
+      <Skeleton className="w-full lg:w-2/3 xl:w-3/4 2xl:-translate-x-6" />
+    );
+
+  // Filter out any image where carouselPosterUrl is null
+  const validImages = data.filter(
+    (image: CarouselImageItem) => image.carouselPosterUrl !== null
+  );
+
+  if (validImages.length === 0) return null;
 
   const handleImageClick = async (coupon: CarouselImageItem) => {
     try {
@@ -40,7 +49,7 @@ const ImageCarousel = () => {
           type: coupon.type,
           title: coupon.title,
           ref_link: coupon.ref_link,
-        }),
+        })
       );
 
       // Construct store URL with encoded coupon data
@@ -62,17 +71,14 @@ const ImageCarousel = () => {
       onMouseLeave={() => plugin?.current?.play()}
     >
       <CarouselContent className="max-h-44 rounded-2xl sm:max-h-72 xl:max-h-80">
-        {data.map((image, index) => (
+        {validImages.map((image, index) => (
           <CarouselItem key={image.carouselPosterUrl} className="rounded-2xl">
             <div
               className="size-full cursor-pointer rounded-2xl"
               onClick={() => handleImageClick(image)}
             >
               <Image
-                src={
-                  image.carouselPosterUrl ??
-                  "https://via.placeholder.com/600x400"
-                }
+                src={image.carouselPosterUrl || "https://via.placeholder.com/600x400"}
                 alt={`carousel image ${index + 1}`}
                 width={1920}
                 height={1080}

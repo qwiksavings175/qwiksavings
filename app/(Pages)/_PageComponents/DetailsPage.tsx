@@ -118,6 +118,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
     fetchFrom,
     slug: slug as string,
   });
+  console.log(detailsData.faq, "hehe");
 
   // success ratio like/dislike count ratio
   const successRatio = (like: number, dislike: number) => {
@@ -658,7 +659,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                     <div
                       className={`flex cursor-pointer items-center justify-between font-semibold`}
                     >
-                 
+                      Privacy Policy
                       <p className="ml-auto inline-block text-center">
                         <Info className="size-4" />
                       </p>
