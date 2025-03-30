@@ -8,9 +8,9 @@ import axios from "axios";
 // });
 
 // For production
-export default axios.create({
-  baseURL: `https://qwiksavings.com/api`,
-});
+// export default axios.create({
+//   baseURL: `https://qwiksavings.com/api`,
+// });
 
 // for vercel preview - Staging (always commit this line)
 // export default axios.create({

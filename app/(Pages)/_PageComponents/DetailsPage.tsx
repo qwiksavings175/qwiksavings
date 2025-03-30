@@ -118,7 +118,6 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
     fetchFrom,
     slug: slug as string,
   });
-  console.log(detailsData.faq, "hehe");
 
   // success ratio like/dislike count ratio
   const successRatio = (like: number, dislike: number) => {

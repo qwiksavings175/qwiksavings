@@ -10,21 +10,38 @@ interface Params {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { storeslug } = params;
-  const titleName = await db.store.findUnique({
-    where: {
-      slug: storeslug,
-    },
+  const storeData = await db.store.findUnique({
+    where: { slug: storeslug },
     select: {
       name: true,
       description: true,
+      metaTitle: true,
+      metaDescription: true,
     },
   });
-  const title = `${titleName?.name}`;
-  const description = titleName?.description as string;
+
+  // Prefer custom metaTitle/metaDescription for SEO; fall back to default name/description if not provided.
+  const title = storeData?.metaTitle || storeData?.name || "Default Title";
+  const description =
+    storeData?.metaDescription || storeData?.description || "Default Description";
 
   return {
     title,
     description,
+    alternates: {
+      canonical: `https://qwiksavings.com/stores/${storeslug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://qwiksavings.com/stores/${storeslug}`,
+      type: "website",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
   };
 }
 
