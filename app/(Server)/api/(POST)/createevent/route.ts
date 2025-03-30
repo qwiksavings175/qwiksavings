@@ -31,7 +31,8 @@ export async function POST(req: Request) {
   const request = (await formData.get("data")) as string;
   const body = await JSON.parse(request);
   // extracting the name out of body
-  const { name, slug, description, title, average_discount, best_offer } = body;
+  const { name, slug, description, title, average_discount, best_offer, metaTitle, metaDescription
+  } = body;
   try {
     let logoUrl;
     let coverUrl;
@@ -84,6 +85,8 @@ export async function POST(req: Request) {
         cover_url: coverUrl ? coverUrl : null,
         average_discount,
         best_offer,
+        metaTitle: metaTitle ? metaTitle : null,
+        metaDescription: metaDescription ? metaDescription : null,
       },
     });
 

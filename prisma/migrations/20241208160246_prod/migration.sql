@@ -319,3 +319,15 @@ ALTER TABLE "_EventCoupon" ADD CONSTRAINT "_EventCoupon_A_fkey" FOREIGN KEY ("A"
 
 -- AddForeignKey
 ALTER TABLE "_EventCoupon" ADD CONSTRAINT "_EventCoupon_B_fkey" FOREIGN KEY ("B") REFERENCES "events"("eventId") ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "stores"
+    ADD COLUMN "metaTitle" TEXT,
+    ADD COLUMN "metaDescription" TEXT;
+
+ALTER TABLE "events"
+    ADD COLUMN "metaTitle" TEXT,
+    ADD COLUMN "metaDescription" TEXT;
+
+ALTER TABLE "categories"
+    ADD COLUMN "metaTitle" TEXT,
+    ADD COLUMN "metaDescription" TEXT;

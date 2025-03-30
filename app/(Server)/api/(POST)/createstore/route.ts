@@ -47,6 +47,8 @@ export async function POST(req: Request) {
     faq,
     addToPopularStores,
     similarStores,
+    metaTitle,
+    metaDescription,
   } = body;
 
   try {
@@ -107,6 +109,8 @@ export async function POST(req: Request) {
         faq: JSON.stringify(faq),
         best_offer: best_offer,
         average_discount: average_discount,
+        metaTitle: metaTitle ? metaTitle : null,
+        metaDescription: metaDescription ? metaDescription : null,
         similarStores: {
           connect: similarStores.map((store: string) => ({
             storeId: Number(store),

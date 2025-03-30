@@ -18,7 +18,7 @@ const IntroSection = () => {
         )}
       >
         <ImageCarousel />
-        <div className="absolute -right-10 top-0 p-4">
+        <div className="absolute right-2 top-0 p-4">
           <CardStackFlipper autoplay />
         </div>
       </div>

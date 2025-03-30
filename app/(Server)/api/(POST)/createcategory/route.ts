@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   const request = (await formData.get("data")) as string;
   const body = await JSON.parse(request);
   // extracting the name out of body
-  const { name, slug, description, addToTodaysTopCategories } = body;
+  const { name, slug, description, addToTodaysTopCategories, metaTitle, metaDescription } = body;
   try {
     let logoUrl;
 
@@ -60,6 +60,8 @@ export async function POST(req: Request) {
         slug: slug.trim(),
         description: description ? description : null,
         logo_url: logoUrl,
+        metaTitle: metaTitle ? metaTitle : null,
+        metaDescription: metaDescription ? metaDescription : null,
         addToTodaysTopCategories:
           addToTodaysTopCategories === "yes" ? true : false,
       },

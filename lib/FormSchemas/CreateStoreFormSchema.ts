@@ -27,4 +27,6 @@ export const CreateStoreFormScehma = z.object({
   average_discount: z.string().default("0"),
   similarStores: z.array(z.string()),
   offers: z.number().default(0),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
 });

@@ -14,16 +14,15 @@ import {
 const PrivacyPolicyPage = () => {
   return (
     <section className="mb-10 flex w-full flex-col items-center gap-y-4 lg:items-start lg:gap-y-6">
-      <div className="mx-auto mt-2 flex w-full max-w-screen-xl flex-col items-start px-4 sm:px-8 sm:text-2xl lg:mt-0 lg:flex-row lg:px-12 2xl:px-0">
-        <div className="flex w-full flex-col gap-5 pl-6 text-lg text-app-main sm:pl-10 lg:sticky lg:top-32 lg:ml-10 lg:h-screen lg:w-1/3 lg:p-5 lg:pl-0">
+      <div className="mx-auto mt-2 flex w-full max-w-screen-xl flex-col items-start px-4 sm:px-8 sm:text-xl lg:mt-0 lg:flex-row lg:px-12 2xl:px-0">
+        <div className="flex w-full flex-col gap-3 pl-6 text-lg text-app-main sm:pl-10 lg:sticky lg:top-32 lg:ml-10 lg:h-screen lg:w-1/3 lg:p-5 lg:pl-0">
           <div className="text-xl font-semibold text-black">
             About QwikSavings.com
           </div>
-          <Separator className="h-1 w-full max-w-32 bg-neutral-400 lg:max-w-full" />
           <Link
             href="/about-us"
             className="w-fit cursor-pointer text-start duration-300 hover:underline"
-          >
+          > 
             Our Company
           </Link>
           <Link
@@ -57,16 +56,16 @@ const PrivacyPolicyPage = () => {
             Contact Us
           </Link>
         </div>
-        <div className="mx-auto mt-6 w-full px-4 text-lg sm:px-8 sm:text-xl lg:mt-0 lg:px-12 xl:px-8 2xl:px-0">
-          <h1 className="ml-2 text-xl font-bold sm:text-2xl">
+        <div className="mx-auto mt-6 w-full px-4 text-lg sm:px-8 sm:text-lg lg:mt-0 lg:px-12 xl:px-8 2xl:px-0">
+          <h1 className="ml-2 text-xl font-bold sm:text-xl">
             Privacy Policy Of Qwik Savings
           </h1>
-          <h2 className="ml-2 mt-2 text-lg font-semibold text-muted-foreground sm:text-xl">
+          <h2 className="ml-2 mt-2 text-lg font-semibold text-muted-foreground sm:text-lg">
             Last updated January 06, 2023
           </h2>
 
           <div className="mt-10 flex flex-col gap-2 lg:pl-2">
-            <div className="text-start text-xl font-semibold text-black sm:text-2xl">
+            <div className="text-start text-xl font-semibold text-black sm:text-xl">
               Introduction
             </div>
             <div className="text-start text-zinc-700 sm:text-justify">
@@ -81,7 +80,7 @@ const PrivacyPolicyPage = () => {
             </div>
           </div>
           <div className="flex flex-col gap-2 lg:pl-2">
-            <div className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl">
+            <div className="mt-4 text-start text-xl font-semibold text-black sm:text-xl">
               Privacy Notice
             </div>
             <div className="flex flex-col gap-3 hyphens-auto text-start text-zinc-700 sm:text-justify">
@@ -308,7 +307,7 @@ const PrivacyPolicyPage = () => {
           </div>
           <div className="mt-10 flex  flex-col gap-10 lg:pl-2">
             <div
-              className="text-start text-xl font-semibold text-black sm:text-2xl"
+              className="text-start text-xl font-semibold text-black sm:text-xl"
               id="q"
             >
               TABLE OF CONTENTS
@@ -461,7 +460,7 @@ const PrivacyPolicyPage = () => {
             </ol>
             <div className="flex flex-col gap-2 text-justify text-zinc-700">
               <span
-                className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl"
+                className="mt-4 text-start text-xl font-semibold text-black sm:text-xl"
                 id="q1"
               >
                 1. WHAT INFORMATION DO WE COLLECT?
@@ -588,7 +587,7 @@ const PrivacyPolicyPage = () => {
           </div>
           <div className="flex flex-col gap-2 text-zinc-700">
             <span
-              className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl"
+              className="mt-4 text-start text-xl font-semibold text-black sm:text-xl"
               id="q2"
             >
               2. HOW DO WE PROCESS YOUR INFORMATION?
@@ -623,7 +622,7 @@ const PrivacyPolicyPage = () => {
           </div>
           <div className="flex flex-col gap-2 text-zinc-700">
             <span
-              className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl"
+              className="mt-4 text-start text-xl font-semibold text-black sm:text-xl"
               id="q3"
             >
               3. WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR INFORMATION?
@@ -794,7 +793,7 @@ const PrivacyPolicyPage = () => {
           </div>
           <div className="flex flex-col gap-2 text-zinc-700">
             <span
-              className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl"
+              className="mt-4 text-start text-xl font-semibold text-black sm:text-xl"
               id="q4"
             >
               4. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?
@@ -832,7 +831,7 @@ const PrivacyPolicyPage = () => {
             className="flex flex-col gap-2 text-zinc-700"
             id="q5"
           >
-            <span className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl">
+            <span className="mt-4 text-start text-xl font-semibold text-black sm:text-xl">
               5. WHAT IS OUR STANCE ON THIRD-PARTY WEBSITES?
             </span>
             <div className="flex flex-col gap-4">
@@ -873,7 +872,7 @@ const PrivacyPolicyPage = () => {
             className="flex flex-col gap-2 text-zinc-700"
             id="q6"
           >
-            <span className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl">
+            <span className="mt-4 text-start text-xl font-semibold text-black sm:text-xl">
               6. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?
             </span>
             <div className="flex flex-col gap-4">
@@ -897,7 +896,7 @@ const PrivacyPolicyPage = () => {
           </div>
           <div className="flex flex-col gap-2 text-zinc-700">
             <span
-              className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl"
+              className="mt-4 text-start text-xl font-semibold text-black sm:text-xl"
               id="q7"
             >
               7. HOW LONG DO WE KEEP YOUR INFORMATION?
@@ -931,7 +930,7 @@ const PrivacyPolicyPage = () => {
           </div>
           <div className="flex flex-col gap-2 text-zinc-700">
             <span
-              className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl"
+              className="mt-4 text-start text-xl font-semibold text-black sm:text-xl"
               id="q8"
             >
               8. HOW DO WE KEEP YOUR INFORMATION SAFE?
@@ -966,7 +965,7 @@ const PrivacyPolicyPage = () => {
           </div>
           <div className="flex flex-col gap-2 text-zinc-700">
             <span
-              className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl"
+              className="mt-4 text-start text-xl font-semibold text-black sm:text-xl"
               id="q9"
             >
               9. WHAT ARE YOUR PRIVACY RIGHTS?
@@ -1098,7 +1097,7 @@ const PrivacyPolicyPage = () => {
           </div>
           <div className="flex flex-col gap-2 text-zinc-700">
             <span
-              className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl"
+              className="mt-4 text-start text-xl font-semibold text-black sm:text-xl"
               id="q10"
             >
               10. CONTROLS FOR DO-NOT-TRACK FEATURES
@@ -1121,7 +1120,7 @@ const PrivacyPolicyPage = () => {
           </div>
           <div className="flex flex-col gap-2 text-zinc-700">
             <span
-              className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl"
+              className="mt-4 text-start text-xl font-semibold text-black sm:text-xl"
               id="q11"
             >
               11. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
@@ -1580,7 +1579,7 @@ const PrivacyPolicyPage = () => {
 
           <div className="flex flex-col gap-2 text-zinc-700">
             <span
-              className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl"
+              className="mt-4 text-start text-xl font-semibold text-black sm:text-xl"
               id="q12"
             >
               12. DO WE MAKE UPDATES TO THIS NOTICE?
@@ -1612,7 +1611,7 @@ const PrivacyPolicyPage = () => {
             className="mb-10 flex flex-col gap-2 text-zinc-700"
             id="q13"
           >
-            <span className="mt-4 text-start text-xl font-semibold text-black sm:text-2xl">
+            <span className="mt-4 text-start text-xl font-semibold text-black sm:text-xl">
               13. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
             </span>
             <div className="flex flex-col gap-4">
@@ -1631,7 +1630,7 @@ const PrivacyPolicyPage = () => {
               </span>
             </div>
           </div>
-          <span className="text-lg font-semibold sm:text-xl lg:text-2xl">
+          <span className="text-lg font-semibold sm:text-lg lg:text-2xl">
             Note: We do not have control over the privacy policy of all the
             sites listed on our website. Once you leave our site and browse the
             store or service listed on our website they will use information in

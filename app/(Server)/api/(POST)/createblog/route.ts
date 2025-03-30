@@ -31,7 +31,7 @@ export async function POST(req: Request) {
   const body = await JSON.parse(request);
 
   // extracting the fields out of body
-  const { title, content, category_id } = body;
+  const { title, content, category_id, metaTitle, metaDescription } = body;
 
   if (!category_id)
     return NextResponse.json(
@@ -70,6 +70,8 @@ export async function POST(req: Request) {
         content,
         thumbnail_url: thumbnailUrl || "",
         category_id: Number(category_id),
+        metaTitle: metaTitle ? metaTitle : null,
+        metaDescription: metaDescription ? metaDescription : null,
       },
     });
 

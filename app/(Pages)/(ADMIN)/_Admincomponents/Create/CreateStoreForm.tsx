@@ -242,6 +242,32 @@ const CreateStoreForm = () => {
             </FormItem>
           )}
         />
+        <FormField
+          control={control}
+          name="metaTitle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Title</FormLabel>
+              <FormControl>
+                <Input placeholder="Meta Title" {...field} type="text" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaDescription"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Description</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Meta Description" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormItem>
           <div className="my-4 flex flex-col items-center gap-x-3 gap-y-4 sm:flex-row">
             <FormLabel>

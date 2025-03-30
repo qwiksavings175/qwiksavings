@@ -47,13 +47,13 @@ const BlogDisplay = () => {
                   <span className="text-gray-400">No image</span>
                 </div>
               )}
-              <div className="flex flex-grow flex-col">
-                <div className="flex w-full items-center justify-between p-4 pb-2">
-                  <Badge className="bg-app-main hover:bg-app-main">
+              <div className="flex flex-col">
+                <div className="flex w-full justify-between p-4 pb-2 flex-col gap-2">
+                  <Badge className="bg-app-main hover:bg-app-main py-1.5 flex justify-center">
                     {blog.category.name}
                   </Badge>
                   <p className="text-sm text-muted-foreground">
-                    {format(blog.updatedAt, "dd-MMM-yyyy")}
+                    {format(blog.updatedAt, "dd/MM/yyyy")}
                   </p>
                 </div>
                 <h2 className="line-clamp-2 px-4 text-lg font-semibold">

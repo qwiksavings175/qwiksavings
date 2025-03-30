@@ -107,6 +107,8 @@ model Store {
   festivals            Festival[]
   similarStores        Store[]               @relation("SimilarStores")
   storeIsSimilarTo     Store[]               @relation("SimilarStores")
+  metaTitle            String?
+  metaDescription      String?
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @default(now()) @updatedAt
 
@@ -138,6 +140,8 @@ model Event {
   best_offer       String   @default("0")
   average_discount String   @default("0")
   coupons          Coupon[] @relation("EventCoupon")
+  metaTitle       String?
+  metaDescription String?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @default(now()) @updatedAt
 
@@ -168,6 +172,8 @@ model Category {
   coupons                  Coupon[]
   blogs                    Blog[]
   UserSubmittedCoupon      UserSubmittedCoupon[]
+  metaTitle                String?
+  metaDescription          String?
   createdAt                DateTime              @default(now())
   updatedAt                DateTime              @default(now()) @updatedAt
 
@@ -181,6 +187,8 @@ model Blog {
   thumbnail_url String
   content       String
   category_id   Int      @default(4)
+  metaTitle     String?
+  metaDescription String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now()) @updatedAt
   category      Category @relation(fields: [category_id], references: [categoryId], onDelete: Cascade)

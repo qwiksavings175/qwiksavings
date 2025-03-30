@@ -861,7 +861,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                             title={coupon.title}
                             couponCode={dialogInfo.couponCode}
                             couponId={dialogInfo.couponId}
-                            expiry={format(coupon.due_date, "dd-MMM-yyyy")}
+                            expiry={format(coupon.due_date, "dd/MM/yyyy")}
                             ref_link={coupon.ref_link}
                             handleReaction={handleReaction}
                             userReaction={userReactions[dialogInfo.couponId]}
