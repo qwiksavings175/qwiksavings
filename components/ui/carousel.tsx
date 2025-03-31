@@ -82,7 +82,6 @@ const Carousel = React.forwardRef<
       setCanScrollNext(emblaApi.canScrollNext());
     }, []);
 
-
     const scrollPrev = React.useCallback(() => {
       api?.scrollPrev();
     }, [api]);
@@ -108,7 +107,6 @@ const Carousel = React.forwardRef<
       if (!api || !setApi) {
         return;
       }
-
       setApi(api);
     }, [api, setApi]);
 
@@ -116,7 +114,6 @@ const Carousel = React.forwardRef<
       if (!api) {
         return;
       }
-
       onSelect(api);
       api.on("reInit", onSelect);
       api.on("select", onSelect);
@@ -143,7 +140,8 @@ const Carousel = React.forwardRef<
         <div
           ref={ref}
           onKeyDownCapture={handleKeyDown}
-          className={cn("relative", className)}
+          // Add the "group" class so child hover effects work.
+          className={cn("relative group", className)}
           role="region"
           aria-roledescription="carousel"
           {...props}
@@ -212,7 +210,9 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "group absolute hidden size-6 rounded-full border-none bg-black/20 outline-none ring-0 transition-all duration-300 ease-linear backdrop:blur-sm hover:bg-black/30 sm:size-8 lg:flex",
+        // Arrow starts hidden (opacity-0) and fades in on carousel hover.
+        "group absolute flex size-6 rounded-full border-none bg-black/20 outline-none ring-0 transition-opacity duration-300 ease-linear backdrop:blur-sm hover:bg-black/30 sm:size-8",
+        "opacity-0 group-hover:opacity-100",
         orientation === "horizontal"
           ? "left-4 top-1/2 -translate-y-1/2 sm:left-12"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -222,7 +222,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ChevronLeft className="size-4 transition-colors duration-200 ease-linear group-hover:text-slate-200   sm:size-6 " />
+      <ChevronLeft className="size-4 transition-colors duration-200 ease-linear group-hover:text-slate-200 sm:size-6" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -241,7 +241,9 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "group absolute hidden size-6 rounded-full border-none bg-black/20 outline-none ring-0 transition-all duration-300 ease-linear backdrop:blur-sm hover:bg-black/30 sm:size-8 lg:flex",
+        // Arrow starts hidden (opacity-0) and only appears on carousel hover.
+        "group absolute flex size-6 rounded-full border-none bg-black/20 outline-none ring-0 transition-opacity duration-300 ease-linear backdrop:blur-sm hover:bg-black/30 sm:size-8",
+        "opacity-0 group-hover:opacity-100",
         orientation === "horizontal"
           ? "right-4 top-1/2 -translate-y-1/2 sm:right-12"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -251,7 +253,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ChevronRight className="size-4 transition-colors duration-200 ease-linear group-hover:text-slate-200   sm:size-6" />
+      <ChevronRight className="size-4 transition-colors duration-200 ease-linear group-hover:text-slate-200 sm:size-6" />
       <span className="sr-only">Next slide</span>
     </Button>
   );

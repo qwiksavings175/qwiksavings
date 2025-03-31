@@ -8,30 +8,62 @@ export const GET = async (req: Request) => {
   try {
     const { searchParams } = new URL(req.url);
     const categoryName = searchParams.get("categoryName");
-    if (!categoryName) {
+
+    // If categoryName is provided, fetch that specific category
+    if (categoryName) {
+      const decodedCategoryName = decodeURIComponent(categoryName);
+      const category = await db.category.findUnique({
+        where: { name: decodedCategoryName },
+        select: {
+          categoryId: true,
+          name: true,
+          coupons: {
+            select: {
+              store: {
+                select: { slug: true, logo_url: true },
+              },
+              ref_link: true,
+              couponId: true,
+              thumbnail_url: true,
+              coupon_code: true,
+              title: true,
+              isVerified: true,
+              user_count: true,
+              type: true,
+            },
+            orderBy: { createdAt: "desc" },
+            take: 8, // Always return top 8 coupons
+          },
+        },
+      });
+
+      if (!category) {
+        return NextResponse.json(
+          { success: false, error: "Category not found" },
+          { status: 404 },
+        );
+      }
+
       return NextResponse.json(
-        { success: false, error: "Category name is required" },
-        { status: 400 },
+        {
+          success: true,
+          categoryId: category.categoryId,
+          name: category.name,
+          coupons: category.coupons,
+        },
+        { status: 200 },
       );
     }
-    const decodedCategoryName = decodeURIComponent(categoryName);
 
-    const category = await db.category.findUnique({
-      where: { name: decodedCategoryName },
+    // Fetch all categories with their top 8 coupons
+    const categories = await db.category.findMany({
       select: {
         categoryId: true,
+        name: true,
         coupons: {
-          where: {
-            due_date: {
-              gt: new Date(),
-            },
-          },
           select: {
             store: {
-              select: {
-                slug: true,
-                logo_url: true,
-              },
+              select: { slug: true, logo_url: true },
             },
             ref_link: true,
             couponId: true,
@@ -42,27 +74,15 @@ export const GET = async (req: Request) => {
             user_count: true,
             type: true,
           },
-          orderBy: {
-            createdAt: "desc",
-          },
-          take: categoryName === "Clothings" ? 8 : 4,
+          orderBy: { createdAt: "desc" },
+          take: 8, // Always return top 8 coupons
         },
       },
+      orderBy: { name: "asc" },
     });
 
-    if (!category) {
-      return NextResponse.json(
-        { error: "Category not found" },
-        { status: 404 },
-      );
-    }
-
     return NextResponse.json(
-      {
-        success: true,
-        coupons: category.coupons,
-        categoryId: category.categoryId,
-      },
+      { success: true, categories },
       { status: 200 },
     );
   } catch (error) {

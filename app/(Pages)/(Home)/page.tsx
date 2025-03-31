@@ -1,31 +1,66 @@
+"use client";
+
+import { useState, useEffect } from "react";
+
 import AboutUs from "./_components/Sections/AboutUs";
 import CategoriesSection from "./_components/Sections/CategoriesSection";
 import FeaturedStoreSection from "./_components/Sections/FeaturedStoreSection";
 import HowToUse from "./_components/Sections/HowToUse";
 import IntroSection from "./_components/Sections/IntroSection";
+import axios from "@/app/api/axios/axios";
 
-export default async function Home() {
+// Define an interface for the category data
+interface Category {
+  categoryId: number;
+  name: string;
+}
+
+export default function Home() {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const { data } = await axios.get("/getcategories");
+        if (data.success) {
+          setCategories(data.categories);
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCategories();
+  }, []);
+
   return (
-    // mainHomePage
     <>
-      {/* Intro Section*/}
+      {/* Intro Section */}
       <IntroSection />
+
+      {/* Featured Store Section */}
       <FeaturedStoreSection />
-      <CategoriesSection title="Clothing Offers" fetchFrom="Clothings" />
-      <CategoriesSection
-        title="Health and Fitness"
-        fetchFrom="Health & Fitness Offers"
-      />
+
+      {/* Render each dynamic category */}
+      {loading ? (
+        <p>Loading categories...</p>
+      ) : (
+        categories.map((cat) => (
+          <CategoriesSection
+            key={cat.categoryId}
+            title={cat.name}
+            fetchFrom={cat.name}
+          />
+        ))
+      )}
+
       {/* How to use Qwik Savings section */}
       <HowToUse />
-      <CategoriesSection title="Travel Offers" fetchFrom="Travels" />
-      <CategoriesSection title="Elelctronic Offers" fetchFrom="Electronics" />
-      <CategoriesSection
-        title="Home Garden Offers"
-        fetchFrom="Home and Garden"
-      />
-      <CategoriesSection title="Beauty Offer" fetchFrom="Beauty" />
-      <CategoriesSection title="Food Offers" fetchFrom="Food" />
+
+      {/* About Us Section */}
       <AboutUs />
     </>
   );

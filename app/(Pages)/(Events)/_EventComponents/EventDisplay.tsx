@@ -9,7 +9,7 @@ const EventDisplay = () => {
   const { data, error, isLoading } = useGetEvents();
 
   return (
-    <div className="mt-6 min-h-[30vh] w-full rounded-md bg-[#f2f0e6] p-4">
+    <div className="mt-6 min-h-[30vh] w-full rounded-lg bg-[#f2f0e6] p-4">
       {isLoading ? (
         <div className="flex h-[30vh] w-full items-center justify-center">
           <Spinner />
@@ -23,7 +23,7 @@ const EventDisplay = () => {
           {data?.map((event: Record<string, any>) => (
             <div
               key={event.eventId}
-              className="flex w-full max-w-[300px] flex-col items-center gap-4 rounded-md bg-popover p-4 shadow-md sm:max-w-[350px] py-4"
+              className="flex w-full max-w-[300px] flex-col items-center gap-4 bg-popover p-4 sm:max-w-[350px] py-4 rounded-xl"
             >
               <h2 className="mt-2 text-center text-lg font-semibold">
                 {event.name}
