@@ -62,6 +62,8 @@ const CreateBlogForm = () => {
       title: "",
       content: "",
       category_id: "",
+      metaTitle: "",
+      metaDescription: "",
       thumbnail: undefined,
     },
     mode: "all",
@@ -147,6 +149,40 @@ const CreateBlogForm = () => {
             </FormItem>
           )}
         />
+        <FormField
+          control={control}
+          name="metaTitle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Title</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter Meta Title"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaDescription"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Description</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter Meta Description"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormItem>
           <div className="my-4 flex flex-col items-center gap-x-3 gap-y-4 sm:flex-row">
             <FormLabel>
@@ -220,9 +256,9 @@ const CreateBlogForm = () => {
                     >
                       {field.value
                         ? categories.find(
-                            (category) =>
-                              `${category.categoryId}` === field.value,
-                          )?.name
+                          (category) =>
+                            `${category.categoryId}` === field.value,
+                        )?.name
                         : "Select a Category"}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>

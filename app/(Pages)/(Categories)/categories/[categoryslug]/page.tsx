@@ -10,18 +10,38 @@ interface Params {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { categoryslug } = params;
-  const titleName = await db.category.findUnique({
-    where: {
-      slug: categoryslug,
-    },
+  const categoryData = await db.category.findUnique({
+    where: { slug: categoryslug },
     select: {
       name: true,
       description: true,
+      metaTitle: true,
+      metaDescription: true,
     },
   });
+
+  // Prefer custom metaTitle/metaDescription for SEO; fall back to default name/description if not provided.
+  const title = categoryData?.metaTitle || categoryData?.name || "Default Title";
+  const description =
+    categoryData?.metaDescription || categoryData?.description || "Default Description";
+
   return {
-    title: `${titleName?.name}`,
-    description: titleName?.description as string,
+    title,
+    description,
+    alternates: {
+      canonical: `https://qwiksavings.com/categories/${categoryslug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://qwiksavings.com/categories/${categoryslug}`,
+      type: "website",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
   };
 }
 

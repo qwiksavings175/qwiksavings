@@ -569,14 +569,12 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                 Today&apos;s Top {isStore ? `${detailsData.name} ` : ""} Coupon Codes
               </h2>
               {detailsData?.coupons && detailsData?.coupons[0] && (
-                <p className="my-2 flex gap-x-2 font-semibold">
-                  <span>&bull;</span>
+                <p className="my-2 flex gap-x-2">
                   <span>{detailsData.coupons[0].title}</span>
                 </p>
               )}
               {detailsData?.coupons && detailsData?.coupons[1] && (
-                <p className="my-2 flex gap-x-2 font-semibold">
-                  <span>&bull;</span>
+                <p className="my-2 flex gap-x-2">
                   <span>{detailsData.coupons[1].title}</span>
                 </p>
               )}

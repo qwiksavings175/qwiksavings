@@ -7,4 +7,6 @@ export const CreateBlogFormSchema = z.object({
   category_id: z.string(),
   keyToDelete: z.string().optional(),
   content: z.string().min(1, "Content is required"),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
 });

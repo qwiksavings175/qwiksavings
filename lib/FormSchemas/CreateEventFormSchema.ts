@@ -14,4 +14,6 @@ export const CreateEventFormSchema = z.object({
   cover_url: z.any().optional(),
   logoUrl: z.string().optional(),
   coverUrl: z.string().optional(),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
 });

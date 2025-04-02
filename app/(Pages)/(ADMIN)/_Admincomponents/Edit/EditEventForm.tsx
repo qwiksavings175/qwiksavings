@@ -70,6 +70,8 @@ const EditEventForm = () => {
       name: "",
       slug: "",
       description: "",
+      metaTitle: "",
+      metaDescription: "",
     },
     mode: "all",
     shouldFocusError: true,
@@ -98,6 +100,8 @@ const EditEventForm = () => {
         name: eventDetails.name,
         slug: eventDetails.slug,
         title: eventDetails.title ?? undefined,
+        metaTitle: eventDetails.metaTitle ?? undefined,
+        metaDescription: eventDetails.metaDescription ?? undefined,
         description: eventDetails.description ?? undefined,
         logo_url: undefined,
         cover_url: undefined,
@@ -221,6 +225,40 @@ const EditEventForm = () => {
               <FormControl>
                 <Input
                   placeholder="Enter the event Name"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaTitle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Title</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter the Event Name"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaDescription"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Description</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter Meta Description here"
                   {...field}
                   type="text"
                 />

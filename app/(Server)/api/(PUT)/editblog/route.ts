@@ -33,7 +33,7 @@ export async function PUT(req: Request) {
   const body = await JSON.parse(request);
 
   // extracting the fields out of body
-  const { title, content, keyToDelete, category_id } = body;
+  const { title, content, keyToDelete, category_id, metaTitle, metaDescription } = body;
   let { thumbnail_url } = body;
   if (!category_id)
     return NextResponse.json(
@@ -82,6 +82,8 @@ export async function PUT(req: Request) {
         title,
         content,
         thumbnail_url: thumbnailUrl || thumbnail_url,
+        metaTitle: metaTitle ? metaTitle : null,
+        metaDescription: metaDescription ? metaDescription : null,
         category_id: Number(category_id),
       },
     });

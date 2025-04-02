@@ -52,18 +52,21 @@ const SearchBar = () => {
     const storesSuggestions = storesData?.map((store: any) => ({
       id: store.storeId,
       name: store.name,
+      slug: store.slug,
       type: "store" as const,
     }));
 
     const categoriesSuggestions = categoriesData?.map((category: any) => ({
       id: category.categoryId,
       name: category.name,
+      slug: category.slug,
       type: "category" as const,
     }));
 
     const eventsSuggestions = eventsData?.map((event: any) => ({
       id: event.eventId,
       name: event.name,
+      slug: event.slug,
       type: "event" as const,
     }));
 
@@ -133,7 +136,7 @@ const SearchBar = () => {
 
   const getTypePlural = (type: string) => {
     if (type === "category") return "categories";
-    return type + "s";
+    return;
   };
 
   return (
@@ -175,7 +178,7 @@ const SearchBar = () => {
                     <Link
                       key={suggestion.id}
                       href={`/${getTypePlural(suggestion.type)}/${encodeURIComponent(
-                        suggestion.name,
+                        suggestion.slug,
                       )}`}
                       className="block px-4 py-2 hover:bg-primary-foreground"
                     >

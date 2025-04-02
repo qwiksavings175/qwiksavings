@@ -46,6 +46,8 @@ const CreateCategoryForm = () => {
       description: "",
       logo: undefined,
       addToTodaysTopCategories: "no",
+      metaTitle: "",
+      metaDescription: "",
     },
     mode: "all",
     shouldFocusError: true,
@@ -165,6 +167,40 @@ const CreateCategoryForm = () => {
                   </TooltipProvider>
                 )}
               </div>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaTitle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Title</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter Meta Title here"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaDescription"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Description</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter Meta Description here"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

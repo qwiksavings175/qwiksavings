@@ -79,6 +79,8 @@ const EditStoreForm = ({ similarStores = [] }: StoreFormProps) => {
       name: "",
       slug: "",
       title: "",
+      metaTitle: "",
+      metaDescription: "",
       logo: undefined,
       ref_link: "",
       isFeatured: "no",
@@ -138,6 +140,8 @@ const EditStoreForm = ({ similarStores = [] }: StoreFormProps) => {
         name: storeDetails.name,
         slug: storeDetails.slug,
         title: storeDetails.title,
+        metaTitle: storeDetails.metaTitle,
+        metaDescription: storeDetails.metaDescription,
         ref_link: storeDetails.ref_link,
         logo: undefined,
         description: storeDetails.description ?? undefined,
@@ -282,6 +286,33 @@ const EditStoreForm = ({ similarStores = [] }: StoreFormProps) => {
           )}
         />
         <FormItem>
+          <FormField
+            control={control}
+            name="metaTitle"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Meta Title</FormLabel>
+                <FormControl>
+                  <Input placeholder="Meta Title" {...field} type="text" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name="metaDescription"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Meta Description</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="Meta Description" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <div className="my-4 flex flex-col items-center gap-x-3 gap-y-4 sm:flex-row">
             <FormLabel>
               <span className="cursor-pointer rounded-lg border border-muted bg-transparent p-2 px-4 transition-colors duration-300 ease-out hover:bg-accent">

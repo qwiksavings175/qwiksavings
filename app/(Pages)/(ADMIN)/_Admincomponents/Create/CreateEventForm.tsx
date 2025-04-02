@@ -1,4 +1,6 @@
 "use client";
+import axios from "@/app/api/axios/axios";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -7,28 +9,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "@/components/ui/use-toast";
 import { Textarea } from "@/components/ui/textarea";
-import axios from "@/app/api/axios/axios";
+import { toast } from "@/components/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as z from "zod";
 
-import Image from "next/image";
 import { Info, MinusCircle } from "lucide-react";
+import Image from "next/image";
 import { ChangeEvent, useRef, useState } from "react";
 
-import { useRouter } from "next/navigation";
-import { CreateEventFormSchema } from "@/lib/FormSchemas/CreateEventFormSchema";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { CreateEventFormSchema } from "@/lib/FormSchemas/CreateEventFormSchema";
 
 type InputType = z.infer<typeof CreateEventFormSchema>;
 
@@ -43,6 +42,8 @@ const CreateEventForm = () => {
       description: "",
       cover_url: "",
       logo_url: "",
+      metaTitle: "",
+      metaDescription: "",
     },
     mode: "all",
     shouldFocusError: true,
@@ -149,6 +150,40 @@ const CreateEventForm = () => {
               <FormControl>
                 <Input
                   placeholder="Enter the Event Name"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaTitle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Title</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter the Event Name"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaDescription"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Description</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter Meta Description here"
                   {...field}
                   type="text"
                 />

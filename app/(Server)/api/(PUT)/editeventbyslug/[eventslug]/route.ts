@@ -39,7 +39,7 @@ export async function PUT(
   const request = (await formData.get("data")) as string;
   const body = await JSON.parse(request);
 
-  const { name, slug, description, title, keyToDeleteLogo, keyToDeleteCover } =
+  const { name, slug, description, title, keyToDeleteLogo, keyToDeleteCover, metaTitle, metaDescription } =
     body;
 
   let { logoUrl, coverUrl } = body;
@@ -89,6 +89,8 @@ export async function PUT(
         slug: slug.trim(),
         description,
         title,
+        metaTitle,
+        metaDescription,
         logo_url: logoUrl,
         cover_url: coverUrl,
       },

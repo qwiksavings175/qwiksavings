@@ -85,6 +85,8 @@ const EditCategoryForm = () => {
       slug: "",
       description: "",
       addToTodaysTopCategories: "no",
+      metaTitle: "",
+      metaDescription: "",
       logo: undefined,
     },
     mode: "all",
@@ -96,6 +98,8 @@ const EditCategoryForm = () => {
       form.reset({
         name: categoryDetails.name,
         slug: categoryDetails.slug,
+        metaTitle: categoryDetails.metaTitle ?? undefined,
+        metaDescription: categoryDetails.metaDescription ?? undefined,
         description: categoryDetails.description ?? undefined,
         logo: undefined,
         addToTodaysTopCategories: categoryDetails.addToTodaysTopCategories
@@ -189,6 +193,40 @@ const EditCategoryForm = () => {
               <FormControl>
                 <Input
                   placeholder="Enter a Category Name"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaTitle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Title</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter Meta Title here"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaDescription"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Description</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter Meta Description here"
                   {...field}
                   type="text"
                 />

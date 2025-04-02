@@ -49,6 +49,8 @@ export async function PUT(
     addToPopularStores,
     similarStores,
     keyToDelete,
+    metaTitle,
+    metaDescription
   } = body;
   let { logo_url } = body;
 
@@ -104,6 +106,8 @@ export async function PUT(
         faq: JSON.stringify(faq),
         average_discount: average_discount,
         best_offer: best_offer,
+        metaTitle: metaTitle,
+        metaDescription: metaDescription,
         similarStores: {
           connect: similarStores.map((store: string) => ({
             storeId: Number(store),

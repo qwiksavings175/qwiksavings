@@ -1,7 +1,6 @@
-// app/blog/[blogId]/page.tsx (Server Component)
-
 import { Metadata } from "next";
 import BlogDetailsPage from "@/app/(Pages)/(Blogs)/_BlogComponents/BlogDetailsPage";
+import db from "@/lib/prisma";
 
 interface Params {
   params: {
@@ -11,13 +10,37 @@ interface Params {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { blogId } = params;
+  const blogData = await db.blog.findUnique({
+    where: { blogId: Number(blogId) },
+    select: {
+      title: true,
+      content: true,
+      metaTitle: true,
+      metaDescription: true,
+    },
+  });
 
-  // Optionally fetch blog details for metadata if needed
-  // const blogData = await fetchBlogData(blogId);
+  // Prefer custom metaTitle/metaDescription for SEO; fall back to default title/description if not provided.
+  const title = blogData?.metaTitle || blogData?.title || "Default Title";
+  const description = blogData?.metaDescription || blogData?.content || "Default Description";
 
   return {
-    title: `Blog ${blogId} - Details`,
-    description: `Read all about Blog ${blogId} and discover in-depth content and insights.`,
+    title,
+    description,
+    alternates: {
+      canonical: `https://qwiksavings.com/blog/${blogId}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://qwiksavings.com/blog/${blogId}`,
+      type: "website",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
   };
 }
 

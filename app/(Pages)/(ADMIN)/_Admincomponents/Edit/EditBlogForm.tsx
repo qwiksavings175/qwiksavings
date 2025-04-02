@@ -81,6 +81,8 @@ const EditBlogForm = ({
       thumbnail: undefined,
       thumbnail_url: "",
       category_id: "",
+      metaTitle: "",
+      metaDescription: "",
     },
     mode: "all",
     shouldFocusError: true,
@@ -97,6 +99,8 @@ const EditBlogForm = ({
         thumbnail_url: blogDetails.thumbnail_url ?? "",
         content: blogDetails.content,
         category_id: blogDetails.category_id.toString() ?? "",
+        metaTitle: blogDetails.metaTitle ?? "",
+        metaDescription: blogDetails.metaDescription ?? "",
       });
       setSelectedImage(blogDetails.thumbnail_url ?? null);
     }
@@ -182,6 +186,40 @@ const EditBlogForm = ({
               <FormControl>
                 <Input
                   placeholder="Enter a Blog Title"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaTitle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Title</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter the Event Name"
+                  {...field}
+                  type="text"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="metaDescription"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Meta Description</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Enter Meta Description here"
                   {...field}
                   type="text"
                 />
