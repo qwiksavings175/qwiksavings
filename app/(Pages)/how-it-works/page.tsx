@@ -41,7 +41,7 @@ const HowItWorks = () => {
       <div className="mx-auto w-full max-w-screen-xl px-4 sm:px-8 sm:text-2xl lg:px-12 xl:px-8 2xl:px-0">
         <div className="mx-auto w-full text-center text-lg sm:mx-0 sm:text-start lg:ml-2 lg:p-5 lg:pt-0">
           <span className="text-2xl font-bold">1,2,3 easy steps</span>
-          <p className="my-5  text-left sm:text-start">
+          <div className="mt-5  text-left sm:text-start">
             It&apos;s quick and easy to get started! Learn how our website works
             in less than 1 minute! Follow these easy steps to maximize your
             savings with our codes!
@@ -59,9 +59,9 @@ const HowItWorks = () => {
                 </div>
               ))}
             </div>
-          </p>
+          </div>
 
-          <p className="my-5  text-left">
+          <p className="mb-5  text-left">
             Love the savings? Share your experience with friends and family!
             Additionally, keep visiting QwikSavings.com for more amazing coupons
             and deals to continue saving on future purchases. If you have any

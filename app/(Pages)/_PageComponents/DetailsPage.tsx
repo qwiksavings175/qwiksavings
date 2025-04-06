@@ -838,8 +838,8 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                           {couponUserCounts[coupon.couponId] || 0} Used
                         </p>
                         <div className="hidden w-full items-center justify-between gap-x-8 sm:flex sm:text-base md:gap-x-16 lg:text-lg">
-                          <p className="flex w-full items-center gap-x-1 text-emerald-900 sm:text-lg">
-                            <Verified className="inline-flex size-4 text-emerald-900 md:size-5" />
+                          <p className="flex w-full items-center gap-x-1 text-green-700 sm:text-lg">
+                            <Verified className="inline-flex size-4 text-green-700 md:size-5" />
                             Verified
                           </p>
                           <p className="flex w-full items-center gap-x-1 text-muted-foreground sm:text-lg md:text-xl">

@@ -22,7 +22,7 @@ const PrivacyPolicyPage = () => {
           <Link
             href="/about-us"
             className="w-fit cursor-pointer text-start duration-300 hover:underline"
-          > 
+          >
             Our Company
           </Link>
           <Link
@@ -491,7 +491,7 @@ const PrivacyPolicyPage = () => {
                   context of your interactions with us and the Services, the
                   choices you make, and the products and features you use. The
                   personal information we collect may include the following:
-                  <ul className="ml-5 mt-5 flex list-disc flex-col gap-2">
+                  <ul className=" mt-5 flex list-disc p-0 pl-4 flex-col gap-2">
                     <li>names</li>
                     <li>phone numbers</li>
                     <li>email addresses</li>
