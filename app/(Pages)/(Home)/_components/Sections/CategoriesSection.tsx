@@ -108,7 +108,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({
     <section
       className={`mx-auto w-full max-w-screen-xl overflow-x-hidden pt-8 ${data.coupons?.length === 0 || isLoading || error ? "hidden" : ""}`}
     >
-      <div className="flex w-full flex-col items-center sm:flex-row sm:justify-between sm:px-10 lg:px-12 xl:px-6 2xl:px-0">
+      <div className="flex w-full flex-col items-end sm:flex-row sm:justify-between sm:px-10 lg:px-12 xl:px-6 2xl:px-0">
         <h2 className="mx-auto place-self-center text-2xl font-bold sm:mx-0 sm:place-self-start lg:text-3xl">
           {title}
         </h2>
@@ -123,7 +123,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({
       <div className="flex flex-nowrap place-items-center items-center justify-start gap-x-8 gap-y-6 overflow-x-auto p-8 sm:px-10 md:grid-cols-2 lg:grid lg:grid-cols-4 lg:px-12 xl:px-6 2xl:px-0">
         {data.coupons?.map((coupon: Coupon, index: number) => (
           <div
-            className="flex w-full max-w-72 shrink-0 flex-col justify-between rounded-xl bg-popover shadow-lg sm:max-w-80 lg:max-w-full min-h-[400px]" // Ensure full height and alignment
+            className="flex w-full max-w-72 shrink-0 flex-col justify-between rounded-xl bg-popover shadow-lg sm:max-w-80 lg:max-w-full min-h-[250px]" // Ensure full height and alignment
             key={index}
           >
             <div>
