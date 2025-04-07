@@ -324,43 +324,48 @@ const EventDetails = () => {
           };
           return acc;
         },
-        {},
+        {}
       );
       setCouponReactions(initialReactions);
     }
   }, [data]);
+
   const handleReaction = async (couponId: number, reaction: ReactionType) => {
+    // Get the current user reaction for the coupon
+    const currentReaction = userReactions[couponId];
+
+    // Determine if the user is changing their reaction or removing it
+    const isChangingReaction = currentReaction && currentReaction !== reaction;
+    const isRemovingReaction = currentReaction === reaction;
+
+    // Keys to update based on the reaction type
     const reactionKey = reaction === "LIKE" ? "like_count" : "dislike_count";
-    const oppositeReactionKey =
-      reaction === "LIKE" ? "dislike_count" : "like_count";
+    const oppositeReactionKey = reaction === "LIKE" ? "dislike_count" : "like_count";
 
-    // Check if the user is changing their reaction
-    const isChangingReaction =
-      userReactions[couponId] && userReactions[couponId] !== reaction;
-    const isRemovingReaction = userReactions[couponId] === reaction;
+    // Save current states for potential rollback
+    const previousCouponState = couponReactions[couponId];
+    const previousUserReaction = currentReaction;
 
-    // Determine increment or decrement
+    // Calculate the new state for the coupon counts
     let increment = isRemovingReaction ? -1 : 1;
+    const newCouponState = { ...previousCouponState };
 
-    // Optimistic update
+    // Update the count for the clicked reaction
+    newCouponState[reactionKey] = Math.max((previousCouponState[reactionKey] || 0) + increment, 0);
+
+    // If the user is changing reaction, decrement the count of the opposite reaction
+    if (isChangingReaction) {
+      newCouponState[oppositeReactionKey] = Math.max(
+        (previousCouponState[oppositeReactionKey] || 0) - 1,
+        0
+      );
+    }
+
+    // Optimistically update both states
     setCouponReactions((prev) => ({
       ...prev,
-      [couponId]: {
-        ...prev[couponId],
-        [reactionKey]: Math.max(
-          (prev[couponId]?.[reactionKey] || 0) + increment,
-          0,
-        ),
-        ...(isChangingReaction && {
-          [oppositeReactionKey]: Math.max(
-            (prev[couponId]?.[oppositeReactionKey] || 0) - 1,
-            0,
-          ),
-        }),
-      },
+      [couponId]: newCouponState,
     }));
-
-    // Update user reactions
     setUserReactions((prev) => ({
       ...prev,
       [couponId]: isRemovingReaction ? null : reaction,
@@ -374,7 +379,7 @@ const EventDetails = () => {
         increment,
       });
 
-      // Update with actual server response
+      // Use the server's response to update counts definitively
       setCouponReactions((prev) => ({
         ...prev,
         [couponId]: {
@@ -383,28 +388,14 @@ const EventDetails = () => {
         },
       }));
     } catch (error) {
-      // Revert optimistic update on error
+      // Revert back to the previous state if there is an error
       setCouponReactions((prev) => ({
         ...prev,
-        [couponId]: {
-          ...prev[couponId],
-          [reactionKey]: Math.max(
-            (prev[couponId]?.[reactionKey] || 0) - increment,
-            0,
-          ),
-          ...(isChangingReaction && {
-            [oppositeReactionKey]:
-              (prev[couponId]?.[oppositeReactionKey] || 0) + 1,
-          }),
-        },
+        [couponId]: previousCouponState,
       }));
       setUserReactions((prev) => ({
         ...prev,
-        [couponId]: isRemovingReaction
-          ? reaction
-          : prev[couponId] === reaction
-            ? null
-            : prev[couponId],
+        [couponId]: previousUserReaction,
       }));
       console.error("Error updating coupon reaction:", error);
     }
