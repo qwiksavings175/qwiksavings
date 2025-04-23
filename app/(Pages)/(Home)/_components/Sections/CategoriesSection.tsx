@@ -28,7 +28,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({
   title,
 }) => {
   const { data, error, isLoading } = useGetCategoryCoupons(fetchFrom);
-  
+
   const [isCouponDialogOpen, setIsCouponDialogOpen] = useState(false);
   const [isDealDialogOpen, setIsDealDialogOpen] = useState(false);
   const [dialogInfo, setDialogInfo] = useState({
@@ -162,16 +162,10 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({
                     VERIFIED
                   </Badge>
                 </div>
-                <p className="-translate-y-8 place-self-start font-semibold first-letter:uppercase">
-                  {coupon.title}
-                </p>
-                <div className="flex w-full -translate-y-4 items-center justify-between text-muted-foreground">
-                  <Link
-                    href={`/store/${coupon.store.slug}`}
-                    className="flex items-start gap-x-4"
-                  >
-                    <span className="w-4/5">{coupon.store.name}</span>
-                  </Link>
+                <div className="flex w-full items-center justify-between text-muted-foreground">
+                  <p className="font-semibold first-letter:uppercase">
+                    {coupon.title}
+                  </p>
                   <span>
                     {couponUserCounts[coupon.couponId] || coupon.user_count} Used
                   </span>
