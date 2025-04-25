@@ -43,7 +43,8 @@ export default function Home() {
 
       {/* Featured Store Section */}
       <FeaturedStoreSection />
-
+      {/* How to use Qwik Savings section */}
+      <HowToUse />
       {/* Render each dynamic category */}
       {loading ? (
         <p>Loading categories...</p>
@@ -57,8 +58,7 @@ export default function Home() {
         ))
       )}
 
-      {/* How to use Qwik Savings section */}
-      <HowToUse />
+
 
       {/* About Us Section */}
       <AboutUs />
