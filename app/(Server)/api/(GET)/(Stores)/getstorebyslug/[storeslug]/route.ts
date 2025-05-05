@@ -13,6 +13,11 @@ export async function GET(
       },
       include: {
         coupons: {
+          where: {
+            due_date: {
+              gte: new Date(),
+            },
+          },
           select: {
             couponId: true,
             due_date: true,
@@ -30,7 +35,6 @@ export async function GET(
               },
             },
           },
-
           orderBy: {
             createdAt: "desc",
           },
