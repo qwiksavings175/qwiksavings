@@ -37,6 +37,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({
     couponCode: "",
     couponId: 0,
     ref_link: "",
+    name: "",
   });
   const [couponUserCounts, setCouponUserCounts] = useState<
     Record<number, number>
@@ -76,6 +77,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({
         couponId: coupon.couponId,
         ref_link: coupon.ref_link,
         title: coupon.title,
+        name: coupon.store.name,
       });
       if (coupon.type === "Deal") {
         setIsDealDialogOpen(true);
@@ -213,10 +215,11 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({
       <Dialog open={isCouponDialogOpen} onOpenChange={setIsCouponDialogOpen}>
         <CouponDialog
           logoUrl={dialogInfo.logoUrl}
+          name={dialogInfo.name}
           title={dialogInfo.title}
           couponCode={dialogInfo.couponCode}
           couponId={dialogInfo.couponId}
-          expiry={format(new Date(), "dd/MM/yyyy")} // You might want to get the actual expiry from the coupon
+          expiry={format(new Date(), "MMMM d, yyyy")} // You might want to get the actual expiry from the coupon
           ref_link={dialogInfo.ref_link}
           handleReaction={handleReaction}
           userReaction={userReactions[dialogInfo.couponId]}
@@ -242,6 +245,7 @@ export default CategoriesSection;
 const CouponDialog: React.FC<{
   logoUrl: string;
   title: string;
+  name: string;
   couponCode: string;
   couponId: number;
   ref_link: string;
@@ -251,6 +255,7 @@ const CouponDialog: React.FC<{
 }> = ({
   logoUrl,
   title,
+  name,
   couponCode,
   couponId,
   expiry,
@@ -280,6 +285,7 @@ const CouponDialog: React.FC<{
               className="aspect-square size-full rounded-full"
             />
           </div>
+          <p>{name}</p>
           <p className="text-lg font-medium">{title}</p>
           <p className="text font-medium text-muted-foreground">
             Ends {expiry}

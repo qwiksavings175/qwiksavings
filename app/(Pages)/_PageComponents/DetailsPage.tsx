@@ -103,7 +103,9 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
     couponCode: "",
     couponId: 0,
     ref_link: "",
+    name: "",
   });
+
 
   // to store like and dislike count of a coupon
   const [couponReactions, setCouponReactions] = useState<
@@ -287,6 +289,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
         couponCode: couponData.coupon_code || "",
         couponId: couponData.couponId,
         ref_link: couponData.ref_link || "",
+        name: couponData.name || detailsData?.name || "",
       });
 
       // Remove the coupon parameter from the URL
@@ -356,6 +359,7 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
         couponId: coupon.couponId,
         ref_link: coupon.ref_link,
         title: coupon.title,
+        name: detailsData.name,
       });
       if (type === "Coupon") {
         setIsCouponDialogOpen(true);
@@ -856,10 +860,11 @@ const DetailsPage: React.FC<DetailsPageProps> = ({ fetchFrom }) => {
                         >
                           <CouponDialog
                             logoUrl={dialogInfo.logoUrl}
+                            name={dialogInfo.name}
                             title={coupon.title}
                             couponCode={dialogInfo.couponCode}
                             couponId={dialogInfo.couponId}
-                            expiry={format(coupon.due_date, "dd/MM/yyyy")}
+                            expiry={format(coupon.due_date, "MMMM d, yyyy")}
                             ref_link={coupon.ref_link}
                             handleReaction={handleReaction}
                             userReaction={userReactions[dialogInfo.couponId]}
@@ -1384,6 +1389,7 @@ const PopularItems: React.FC<PopularItemProps> = ({
 
 const CouponDialog: React.FC<{
   logoUrl: string;
+  name: string;
   title: string;
   couponCode: string;
   couponId: number;
@@ -1393,6 +1399,7 @@ const CouponDialog: React.FC<{
   userReaction: ReactionType | null;
 }> = ({
   logoUrl,
+  name,
   title,
   couponCode,
   couponId,
@@ -1423,6 +1430,7 @@ const CouponDialog: React.FC<{
               className="aspect-square size-full rounded-full"
             />
           </div>
+          <p className="">{name}</p>
           <p className="text-lg font-medium">{title}</p>
           <p className="text font-medium text-muted-foreground">
             Ends {expiry}

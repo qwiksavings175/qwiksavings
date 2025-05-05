@@ -111,7 +111,10 @@ const EventDetails = () => {
     couponCode: "",
     couponId: 0,
     ref_link: "",
+    name: ""
   });
+
+  // to
 
   // to store like and dislike count of a coupon
   const [couponReactions, setCouponReactions] = useState<
@@ -234,6 +237,7 @@ const EventDetails = () => {
         couponCode: couponData.coupon_code || "",
         couponId: couponData.couponId,
         ref_link: couponData.ref_link || "",
+        name: couponData.name || data?.name || "",
       });
 
       if (couponData.type === "Deal") {
@@ -295,6 +299,7 @@ const EventDetails = () => {
         couponId: coupon.couponId,
         ref_link: coupon.ref_link,
         title: coupon.title,
+        name: data?.name || coupon.name,
       });
       if (type === "Coupon") {
         setIsCouponDialogOpen(true);
@@ -642,10 +647,11 @@ const EventDetails = () => {
                           >
                             <CouponDialog
                               logoUrl={dialogInfo.logoUrl}
+                              name={dialogInfo.name}
                               title={coupon.title}
                               couponCode={dialogInfo.couponCode}
                               couponId={dialogInfo.couponId}
-                              expiry={format(coupon.due_date, "dd/MM/yyyy")}
+                              expiry={format(coupon.due_date, "MMMM d, yyyy")}
                               ref_link={coupon.ref_link}
                               handleReaction={handleReaction}
                               userReaction={userReactions[dialogInfo.couponId]}
@@ -1083,11 +1089,13 @@ const CouponDialog: React.FC<{
   couponCode: string;
   couponId: number;
   ref_link: string;
+  name: string;
   expiry: string;
   handleReaction: (couponId: number, reaction: ReactionType) => void;
   userReaction: ReactionType | null;
 }> = ({
   logoUrl,
+  name,
   title,
   couponCode,
   couponId,
@@ -1120,6 +1128,7 @@ const CouponDialog: React.FC<{
               className="aspect-square size-full rounded-full"
             />
           </div>
+          <p >{name}</p>
           <p className="text-lg font-medium">{title}</p>
           <p className="text font-medium text-muted-foreground">
             Ends {expiry}
